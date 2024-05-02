@@ -57,6 +57,15 @@
 			<artifactId>spotless-maven-plugin</artifactId>
 			<version>${spotless.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
