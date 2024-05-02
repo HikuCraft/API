@@ -4,15 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.util.UUID;
-import org.hikuro.hikucraft.util.Database;
 import org.hikuro.hikucraft.entity.LastConnectionInfo;
+import org.hikuro.hikucraft.util.Database;
 
 public class DBLastConnectionInfoRepository implements LastConnectionInfoRepository {
 	@Override
-	public LastConnectionInfo get(UUID player) throws SQLException {
+	public LastConnectionInfo find(UUID player) throws SQLException {
 		Database db = Database.getInstance();
 		String query = "SELECT * FROM LastConnectionInfo WHERE UUID = ?";
-		ResultSet rs = db.executePreparedQuery(query, player.toString());
+		ResultSet rs = db.executePreparedQuery(query, player);
 		return new LastConnectionInfo(
 				UUID.fromString(rs.getString("UUID")),
 				rs.getTimestamp("Date").toLocalDateTime(),

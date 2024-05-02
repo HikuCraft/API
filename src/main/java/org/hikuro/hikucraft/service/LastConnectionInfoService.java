@@ -15,7 +15,7 @@ public class LastConnectionInfoService {
 
 	public LastConnectionInfo getPlayerLastConnectionInfo(UUID player) {
 		try {
-			return this.lastConnectionInfoRepository.get(player);
+			return this.lastConnectionInfoRepository.find(player);
 		} catch (SQLException e) {
 			return null;
 		}
