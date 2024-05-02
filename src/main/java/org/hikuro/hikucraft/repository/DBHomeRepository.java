@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.hikuro.hikucraft.util.Database;
 import org.hikuro.hikucraft.entity.Home;
+import org.hikuro.hikucraft.util.Database;
 
 public class DBHomeRepository implements HomeRepository {
 
@@ -60,8 +60,7 @@ public class DBHomeRepository implements HomeRepository {
 	@Override
 	public void update(Home home) throws SQLException {
 		Database db = Database.getInstance();
-		String query =
-				"UPDATE Home SET World = ?, X = ?, Y = ?, Z = ? WHERE UUID = ? AND Name = ?";
+		String query = "UPDATE Home SET World = ?, X = ?, Y = ?, Z = ? WHERE UUID = ? AND Name = ?";
 		db.executePreparedUpdate(
 				query,
 				home.getWorld(),
