@@ -14,17 +14,17 @@ public class HomeService {
 		this.homeRepository = homeRepository;
 	}
 
-	public Home getHomeByIdAndOwner(UUID id, String owner) {
+	public Home getHomeByPlayerAndName(UUID player, String name) {
 		try {
-			return this.homeRepository.getByIdAndOwner(id, owner);
+			return this.homeRepository.findByPlayerAndName(player, name);
 		} catch (SQLException e) {
 			return null;
 		}
 	}
 
-	public List<Home> getHomesByOwner(String owner) {
+	public List<Home> getHomesByPlayer(UUID player) {
 		try {
-			return this.homeRepository.getByOwner(owner);
+			return this.homeRepository.findByPlayer(player);
 		} catch (SQLException e) {
 			return new ArrayList<>();
 		}
@@ -48,9 +48,9 @@ public class HomeService {
 		}
 	}
 
-	public void deleteHome(UUID id, String owner) {
+	public void deleteHome(UUID player, String name) {
 		try {
-			this.homeRepository.delete(id, owner);
+			this.homeRepository.delete(player, name);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();

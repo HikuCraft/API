@@ -3,15 +3,15 @@ package org.hikuro.hikucraft.entity;
 import java.util.UUID;
 
 public class Home {
-	private final UUID owner;
+	private final UUID player;
 	private final String name;
 	private final String world;
 	private final int x;
 	private final int y;
 	private final int z;
 
-	public Home(UUID owner, String name, String world, int x, int y, int z) {
-		this.owner = owner;
+	public Home(UUID player, String name, String world, int x, int y, int z) {
+		this.player = player;
 		this.name = name;
 		this.world = world;
 		this.x = x;
@@ -20,8 +20,8 @@ public class Home {
 	}
 
 	// Getters
-	public UUID getOwner() {
-		return owner;
+	public UUID getPlayer() {
+		return player;
 	}
 
 	public String getName() {

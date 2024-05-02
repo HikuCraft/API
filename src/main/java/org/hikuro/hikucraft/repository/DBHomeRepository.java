@@ -11,13 +11,13 @@ import org.hikuro.hikucraft.entity.Home;
 public class DBHomeRepository implements HomeRepository {
 
 	@Override
-	public Home getByIdAndOwner(UUID id, String owner) throws SQLException {
+	public Home findByPlayerAndName(UUID player, String name) throws SQLException {
 		Database db = Database.getInstance();
-		String query = "SELECT * FROM homes WHERE id = ? AND owner = ?";
-		ResultSet rs = db.executePreparedQuery(query, id, owner);
+		String query = "SELECT * FROM Home WHERE UUID = ? AND Name = ?";
+		ResultSet rs = db.executePreparedQuery(query, player, name);
 		return new Home(
 				UUID.fromString(rs.getString("UUID")),
-				rs.getString("Owner"),
+				rs.getString("Name"),
 				rs.getString("World"),
 				rs.getInt("X"),
 				rs.getInt("Y"),
@@ -25,16 +25,16 @@ public class DBHomeRepository implements HomeRepository {
 	}
 
 	@Override
-	public List<Home> getByOwner(String owner) throws SQLException {
+	public List<Home> findByPlayer(UUID player) throws SQLException {
 		Database db = Database.getInstance();
-		String query = "SELECT * FROM homes WHERE owner = ?";
-		ResultSet rs = db.executePreparedQuery(query, owner);
+		String query = "SELECT * FROM Home WHERE UUID = ?";
+		ResultSet rs = db.executePreparedQuery(query, player);
 		List<Home> homes = new ArrayList<>();
 		while (rs.next()) {
 			homes.add(
 					new Home(
 							UUID.fromString(rs.getString("UUID")),
-							rs.getString("Owner"),
+							rs.getString("Name"),
 							rs.getString("World"),
 							rs.getInt("X"),
 							rs.getInt("Y"),
@@ -46,10 +46,10 @@ public class DBHomeRepository implements HomeRepository {
 	@Override
 	public void create(Home home) throws SQLException {
 		Database db = Database.getInstance();
-		String query = "INSERT INTO Home (UUID, Owner, World, X, Y, Z) VALUES (?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Home (UUID, Name, World, X, Y, Z) VALUES (?, ?, ?, ?, ?, ?)";
 		db.executePreparedUpdate(
 				query,
-				home.getOwner().toString(),
+				home.getPlayer(),
 				home.getName(),
 				home.getWorld(),
 				home.getX(),
@@ -61,21 +61,21 @@ public class DBHomeRepository implements HomeRepository {
 	public void update(Home home) throws SQLException {
 		Database db = Database.getInstance();
 		String query =
-				"UPDATE Home SET World = ?, X = ?, Y = ?, Z = ? WHERE UUID = ? AND Owner = ?";
+				"UPDATE Home SET World = ?, X = ?, Y = ?, Z = ? WHERE UUID = ? AND Name = ?";
 		db.executePreparedUpdate(
 				query,
 				home.getWorld(),
 				home.getX(),
 				home.getY(),
 				home.getZ(),
-				home.getOwner().toString(),
+				home.getPlayer(),
 				home.getName());
 	}
 
 	@Override
-	public void delete(UUID id, String owner) throws SQLException {
+	public void delete(UUID player, String name) throws SQLException {
 		Database db = Database.getInstance();
-		String query = "DELETE FROM homes WHERE id = ? AND owner = ?";
-		db.executePreparedUpdate(query, id, owner);
+		String query = "DELETE FROM Home WHERE UUID = ? AND Name = ?";
+		db.executePreparedUpdate(query, player, name);
 	}
 }

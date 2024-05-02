@@ -7,13 +7,13 @@ import org.hikuro.hikucraft.entity.Home;
 
 public interface HomeRepository {
 
-	Home getByIdAndOwner(UUID id, String owner) throws SQLException;
+	Home findByPlayerAndName(UUID player, String name) throws SQLException;
 
-	List<Home> getByOwner(String owner) throws SQLException;
+	List<Home> findByPlayer(UUID player) throws SQLException;
 
 	void create(Home home) throws SQLException;
 
 	void update(Home home) throws SQLException;
 
-	void delete(UUID id, String owner) throws SQLException;
+	void delete(UUID player, String owner) throws SQLException;
 }
