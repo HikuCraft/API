@@ -8,8 +8,7 @@ CREATE TABLE Player (
     UUID VARCHAR(36) NOT NULL,
 
     PRIMARY KEY (UUID),
-    UNIQUE (UUID),
-
+    UNIQUE (UUID)
 );
 
 
@@ -21,7 +20,7 @@ CREATE TABLE Economy (
     PRIMARY KEY (UUID),
     UNIQUE (UUID),
 
-    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -39,7 +38,7 @@ CREATE TABLE Home (
 
     CONSTRAINT HomeWorld CHECK (World IN ("survival", "village")),
 
-    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -56,7 +55,7 @@ CREATE TABLE LastConnectionInfo (
         PRIMARY KEY (UUID),
         UNIQUE (UUID),
 
-        FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE,
+        FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -68,7 +67,7 @@ CREATE TABLE TimeSpent (
     PRIMARY KEY (UUID),
     UNIQUE (UUID),
 
-    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -84,19 +83,18 @@ CREATE TABLE SecondChance (
     PRIMARY KEY (UUID),
     UNIQUE (UUID),
 
-    CONSTRAINT HomeWorld CHECK (World IN ("survival")),
+    CONSTRAINT DeathWorld CHECK (World IN ("survival")),
 
-    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (UUID) REFERENCES Player(UUID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
 
 -- Users
-DROP USER IF EXISTS 'HikuCraft_admin'@'localhost';
 DROP USER IF EXISTS 'HikuCraft_user'@'localhost';
 CREATE USER 'HikuCraft_user'@'localhost' IDENTIFIED BY 'HikuCraft_user_psw';
 
 GRANT SELECT ON HikuCraft.* TO 'HikuCraft_user'@'localhost';
 GRANT INSERT ON HikuCraft.* TO 'HikuCraft_user'@'localhost';
-GRANT UPDATE(TimeSpent) ON HikuCraft.PlayerData TO 'HikuCraft_user'@'localhost';
+GRANT UPDATE ON HikuCraft.* TO 'HikuCraft_user'@'localhost';
 GRANT DELETE ON HikuCraft.Home TO 'HikuCraft_user'@'localhost';
