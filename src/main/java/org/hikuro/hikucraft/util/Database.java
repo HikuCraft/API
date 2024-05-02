@@ -1,4 +1,4 @@
-package org.hikuro.hikucraft;
+package org.hikuro.hikucraft.util;
 
 import java.sql.*;
 

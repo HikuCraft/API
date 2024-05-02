@@ -1,12 +1,12 @@
-package org.hikuro.hikucraft.api.repository;
+package org.hikuro.hikucraft.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.hikuro.hikucraft.Database;
-import org.hikuro.hikucraft.api.entity.Home;
+import org.hikuro.hikucraft.util.Database;
+import org.hikuro.hikucraft.entity.Home;
 
 public class DBHomeRepository implements HomeRepository {
 

@@ -1,11 +1,11 @@
-package org.hikuro.hikucraft.api.service;
+package org.hikuro.hikucraft.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import org.hikuro.hikucraft.api.entity.Home;
-import org.hikuro.hikucraft.api.repository.HomeRepository;
+import org.hikuro.hikucraft.entity.Home;
+import org.hikuro.hikucraft.repository.HomeRepository;
 
 public class HomeService {
 	private final HomeRepository homeRepository;

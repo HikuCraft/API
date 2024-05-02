@@ -80,10 +80,10 @@ CREATE TABLE SecondChance (
 
 
 -- Users
-CREATE USER IF NOT EXISTS 'HikuCraft_admin'@'localhost' IDENTIFIED BY 'HikuCraft_admin_psw';
-CREATE USER IF NOT EXISTS 'HikuCraft_user'@'localhost' IDENTIFIED BY 'HikuCraft_user_psw';
+DROP USER IF EXISTS 'HikuCraft_admin'@'localhost';
+DROP USER IF EXISTS 'HikuCraft_user'@'localhost';
+CREATE USER 'HikuCraft_user'@'localhost' IDENTIFIED BY 'HikuCraft_user_psw';
 
-GRANT ALL PRIVILEGES ON HikuCraft.* TO 'HikuCraft_admin'@'localhost';
 GRANT SELECT ON HikuCraft.* TO 'HikuCraft_user'@'localhost';
 GRANT INSERT ON HikuCraft.* TO 'HikuCraft_user'@'localhost';
 GRANT UPDATE(TimeSpent) ON HikuCraft.PlayerData TO 'HikuCraft_user'@'localhost';

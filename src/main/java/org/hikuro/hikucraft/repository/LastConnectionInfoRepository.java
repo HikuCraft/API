@@ -1,8 +1,8 @@
-package org.hikuro.hikucraft.api.repository;
+package org.hikuro.hikucraft.repository;
 
 import java.sql.SQLException;
 import java.util.UUID;
-import org.hikuro.hikucraft.api.entity.LastConnectionInfo;
+import org.hikuro.hikucraft.entity.LastConnectionInfo;
 
 public interface LastConnectionInfoRepository {
 	LastConnectionInfo get(UUID player) throws SQLException;

@@ -1,4 +1,4 @@
-package org.hikuro.hikucraft.api.entity;
+package org.hikuro.hikucraft.entity;
 
 import java.time.Duration;
 import java.util.UUID;

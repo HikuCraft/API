@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.hikuro.hikucraft</groupId>
-	<artifactId>API</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<artifactId>HikuCraftAPI</artifactId>
+	<version>0.2</version>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
@@ -43,6 +43,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- LuckPerms API -->
+		<dependency>
+			<groupId>net.luckperms</groupId>
+			<artifactId>api</artifactId>
+			<version>5.4</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Spotless -->
 		<dependency>

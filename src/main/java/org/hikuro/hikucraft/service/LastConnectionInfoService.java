@@ -1,9 +1,9 @@
-package org.hikuro.hikucraft.api.service;
+package org.hikuro.hikucraft.service;
 
 import java.sql.SQLException;
 import java.util.UUID;
-import org.hikuro.hikucraft.api.entity.LastConnectionInfo;
-import org.hikuro.hikucraft.api.repository.LastConnectionInfoRepository;
+import org.hikuro.hikucraft.entity.LastConnectionInfo;
+import org.hikuro.hikucraft.repository.LastConnectionInfoRepository;
 
 public class LastConnectionInfoService {
 
