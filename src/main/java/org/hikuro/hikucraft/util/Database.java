@@ -26,14 +26,12 @@ public class Database {
 		}
 	}
 
-	public int executePreparedUpdate(String query, Object... params) throws SQLException {
-		int rowsAffected = 0;
+	public void executePreparedUpdate(String query, Object... params) throws SQLException {
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		for (int i = 0; i < params.length; i++) {
 			preparedStatement.setObject(i + 1, params[i].toString());
 		}
-		rowsAffected = preparedStatement.executeUpdate();
-		return rowsAffected;
+		preparedStatement.executeUpdate();
 	}
 
 	public ResultSet executePreparedQuery(String query, Object... params) throws SQLException {
