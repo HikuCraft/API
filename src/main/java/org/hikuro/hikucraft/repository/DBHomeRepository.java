@@ -11,21 +11,7 @@ import org.hikuro.hikucraft.util.Database;
 public class DBHomeRepository implements HomeRepository {
 
 	@Override
-	public Home findByPlayerAndName(UUID player, String name) throws SQLException {
-		Database db = Database.getInstance();
-		String query = "SELECT * FROM Home WHERE UUID = ? AND Name = ?";
-		ResultSet rs = db.executePreparedQuery(query, player, name);
-		return new Home(
-				UUID.fromString(rs.getString("UUID")),
-				rs.getString("Name"),
-				rs.getString("World"),
-				rs.getInt("X"),
-				rs.getInt("Y"),
-				rs.getInt("Z"));
-	}
-
-	@Override
-	public List<Home> findByPlayer(UUID player) throws SQLException {
+	public List<Home> getByPlayer(UUID player) throws SQLException {
 		Database db = Database.getInstance();
 		String query = "SELECT * FROM Home WHERE UUID = ?";
 		ResultSet rs = db.executePreparedQuery(query, player);
@@ -44,7 +30,21 @@ public class DBHomeRepository implements HomeRepository {
 	}
 
 	@Override
-	public void create(Home home) throws SQLException {
+	public Home getById(HomeID homeID) throws Exception {
+		Database db = Database.getInstance();
+		String query = "SELECT * FROM Home WHERE UUID = ? AND Name = ?";
+		ResultSet rs = db.executePreparedQuery(query, homeID.player(), homeID.name());
+		return new Home(
+				UUID.fromString(rs.getString("UUID")),
+				rs.getString("Name"),
+				rs.getString("World"),
+				rs.getInt("X"),
+				rs.getInt("Y"),
+				rs.getInt("Z"));
+	}
+
+	@Override
+	public void save(Home home) throws Exception {
 		Database db = Database.getInstance();
 		String query = "INSERT INTO Home (UUID, Name, World, X, Y, Z) VALUES (?, ?, ?, ?, ?, ?)";
 		db.executePreparedUpdate(
@@ -72,9 +72,9 @@ public class DBHomeRepository implements HomeRepository {
 	}
 
 	@Override
-	public void delete(UUID player, String name) throws SQLException {
+	public void delete(HomeID homeID) throws Exception {
 		Database db = Database.getInstance();
 		String query = "DELETE FROM Home WHERE UUID = ? AND Name = ?";
-		db.executePreparedUpdate(query, player, name);
+		db.executePreparedUpdate(query, homeID.player(), homeID.name());
 	}
 }

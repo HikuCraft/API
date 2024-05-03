@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.hikuro.hikucraft.entity.Home;
+import org.hikuro.hikucraft.repository.HomeID;
 import org.hikuro.hikucraft.repository.HomeRepository;
 
 public class HomeService {
@@ -16,15 +17,15 @@ public class HomeService {
 
 	public Home getHomeByPlayerAndName(UUID player, String name) {
 		try {
-			return this.homeRepository.findByPlayerAndName(player, name);
-		} catch (SQLException e) {
+			return this.homeRepository.getById(new HomeID(player, name));
+		} catch (Exception e) {
 			return null;
 		}
 	}
 
 	public List<Home> getHomesByPlayer(UUID player) {
 		try {
-			return this.homeRepository.findByPlayer(player);
+			return this.homeRepository.getByPlayer(player);
 		} catch (SQLException e) {
 			return new ArrayList<>();
 		}
@@ -32,8 +33,8 @@ public class HomeService {
 
 	public void createHome(Home home) {
 		try {
-			this.homeRepository.create(home);
-		} catch (SQLException e) {
+			this.homeRepository.save(home);
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
@@ -42,7 +43,7 @@ public class HomeService {
 	public void updateHome(Home home) {
 		try {
 			this.homeRepository.update(home);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
@@ -50,8 +51,8 @@ public class HomeService {
 
 	public void deleteHome(UUID player, String name) {
 		try {
-			this.homeRepository.delete(player, name);
-		} catch (SQLException e) {
+			this.homeRepository.delete(new HomeID(player, name));
+		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
