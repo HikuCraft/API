@@ -1,7 +1,7 @@
 package org.hikuro.hikucraft.service;
 
-import java.sql.SQLException;
 import java.util.UUID;
+import org.hikuro.hikucraft.entity.Economy;
 import org.hikuro.hikucraft.repository.EconomyRepository;
 
 public class EconomyService {
@@ -11,12 +11,19 @@ public class EconomyService {
 		this.economyRepository = economyRepository;
 	}
 
+	public void create(UUID player) {
+		try {
+			this.economyRepository.save(new Economy(player, 0.0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void deposit(UUID player, double amount) {
 		try {
 			double balance = this.getBalance(player);
-			this.economyRepository.saveBalance(player, balance + amount);
-		} catch (SQLException e) {
-			// TODO: Handle exception
+			this.economyRepository.update(new Economy(player, balance + amount));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -24,21 +31,17 @@ public class EconomyService {
 	public void withdraw(UUID player, double amount) {
 		try {
 			double balance = this.getBalance(player);
-			if (balance < amount)
-				throw new IllegalArgumentException(
-						"Insufficient funds"); // TODO: Create custom exception
-			this.economyRepository.saveBalance(player, balance - amount);
-		} catch (SQLException e) {
-			// TODO: Handle exception
+			this.economyRepository.update(new Economy(player, balance - amount));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public double getBalance(UUID player) {
 		try {
-			return this.economyRepository.findBalance(player);
-		} catch (SQLException e) {
-			// TODO: Handle exception
+			return this.economyRepository.getById(player).getBalance();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return 0.0;
 		}
 	}
@@ -57,18 +60,16 @@ public class EconomyService {
 
 	public void setBalance(UUID player, double amount) {
 		try {
-			this.economyRepository.saveBalance(player, amount);
-		} catch (SQLException e) {
-			// TODO: Handle exception
+			this.economyRepository.update(new Economy(player, amount));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void resetBalance(UUID player) {
 		try {
-			this.economyRepository.resetBalance(player);
-		} catch (SQLException e) {
-			// TODO: Handle exception
+			this.economyRepository.update(new Economy(player, 0.0));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
