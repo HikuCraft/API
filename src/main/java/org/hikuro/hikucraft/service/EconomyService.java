@@ -42,7 +42,13 @@ public class EconomyService {
 			return this.economyRepository.getById(player).getBalance();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0.0;
+			try {
+				this.economyRepository.save(new Economy(player, 0.0));
+				return 0.0;
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				return 0.0;
+			}
 		}
 	}
 

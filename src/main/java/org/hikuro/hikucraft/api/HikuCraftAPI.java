@@ -29,10 +29,6 @@ public class HikuCraftAPI {
 		this.statisticsService = new StatisticsService();
 	}
 
-	public void onEnable() {}
-
-	public void onDisable() {}
-
 	public EconomyService getEconomyService() {
 		return this.economyService;
 	}
